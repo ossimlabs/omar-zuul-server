@@ -33,6 +33,9 @@ buildscript {
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
+apply plugin: "java"
+apply plugin: "maven-publish"
+apply plugin: "maven"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
