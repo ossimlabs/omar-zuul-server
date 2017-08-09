@@ -8,13 +8,7 @@ buildscript {
 
           "MAINTAINER DigitalGlobe-RadiantBlue",
           """LABEL com.digitalglobe.version="" """,
-          "RUN mkdir /home/omar",
           "COPY ${project.name}-${buildVersion}-${buildVersionTag}.jar /home/omar",
-          "RUN chown -R 1001:0 /home/omar",
-					"RUN chown 1001:0 /home/omar",
-					"RUN chmod -R g+rw /home/omar",
-					'RUN find $HOME -type d -exec chmod g+x {} +',
-          "USER 1001",
           "WORKDIR /home/omar",
           "VOLUME /dev/random /home /Users",
           "EXPOSE 8761",
