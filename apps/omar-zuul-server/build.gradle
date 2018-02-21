@@ -1,7 +1,14 @@
 buildscript {
-   ext {
-      springBootVersion = '1.5.9.RELEASE'
+  ext {
      baseImage = "omar-base"
+  }
+  if(System.env.OMAR_COMMON_PROPERTIES)
+  {
+      apply from: System.env.OMAR_COMMON_PROPERTIES
+  }
+ 
+   ext {
+      springBootVersion = "${springBootV}"
      dockerStatementsOverride = {
        [
           "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
@@ -17,11 +24,7 @@ buildscript {
        ]
      }
    }
-  if(System.env.OMAR_COMMON_PROPERTIES)
-  {
-      apply from: System.env.OMAR_COMMON_PROPERTIES
-  }
-   repositories {
+  repositories {
       mavenLocal()
       maven { url "${ossimMavenProxy}" }
       mavenCentral()
@@ -32,7 +35,8 @@ buildscript {
 }
 
 plugins {
-    id "org.sonarqube" version "2.5"
+    id "com.github.ben-manes.versions" version "0.17.0"
+    id "org.sonarqube" version "2.6.2"
 }
 
 apply plugin: 'groovy'
@@ -63,7 +67,7 @@ dependencies {
 
 dependencyManagement {
 	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Dalston.SR5"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudDependencyV}"
 	}
 }
 
