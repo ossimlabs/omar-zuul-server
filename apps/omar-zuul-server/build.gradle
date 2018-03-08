@@ -1,14 +1,6 @@
 buildscript {
   ext {
      baseImage = "omar-base"
-  }
-  if(System.env.OMAR_COMMON_PROPERTIES)
-  {
-      apply from: System.env.OMAR_COMMON_PROPERTIES
-  }
- 
-   ext {
-      springBootVersion = "${springBootV}"
      dockerStatementsOverride = {
        [
           "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
@@ -23,7 +15,17 @@ buildscript {
 
        ]
      }
+  }
+  
+  if(System.env.OMAR_COMMON_PROPERTIES)
+  {
+      apply from: System.env.OMAR_COMMON_PROPERTIES
+  }
+ 
+   ext {
+      springBootVersion = "${springBootV}"
    }
+   
   repositories {
       mavenLocal()
       maven { url "${ossimMavenProxy}" }
