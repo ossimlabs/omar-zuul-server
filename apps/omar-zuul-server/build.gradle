@@ -29,7 +29,9 @@ buildscript {
   repositories {
       mavenLocal()
       maven { url "${ossimMavenProxy}" }
-      mavenCentral()
+      if( !System.env.WWW_CONNECTED || Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
+        mavenCentral()
+      }
    }
    dependencies {
       classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -55,7 +57,9 @@ targetCompatibility = 1.8
 repositories {
   mavenLocal()
   maven { url "${ossimMavenProxy}" }
-  mavenCentral()
+  if( !System.env.WWW_CONNECTED || Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
+    mavenCentral()
+  }
 }
 
 
